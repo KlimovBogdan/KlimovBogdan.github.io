@@ -7933,6 +7933,16 @@ fieldset:disabled .btn {
           transform: translateY(4px);
 }
 
+.tooltip-inner {
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+          box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  color: #050212;
+  padding: 30px;
+  max-width: 320px;
+}
+
 .logistics {
   padding: 100px 0;
   text-align: center;
@@ -8014,15 +8024,17 @@ fieldset:disabled .btn {
   font-size: 14px;
 }
 
-.logistics .individual a {
+.logistics .individual button {
   text-decoration: underline;
   -webkit-transition: .3s;
   -o-transition: .3s;
   transition: .3s;
   cursor: pointer;
+  border: none;
+  background: none;
 }
 
-.logistics .individual a:hover {
+.logistics .individual button:hover {
   color: #fe7f2e;
 }
 
@@ -14896,7 +14908,16 @@ a {
   }
 
   .welcome .burgerNav {
-    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 73px;
   }
 
   .brands .section__descr {
@@ -14923,12 +14944,22 @@ a {
     display: none;
   }
 
+  .howWeWork__buttons {
+    margin-bottom: 40px;
+  }
+
   .howWeWork .swiper-container {
     display: block;
-    width: 428px;
-    height: 250px;
+    width: 528px;
+    height: 280px;
     overflow-x: hidden;
     overflow-y: visible;
+  }
+
+  .howWeWork .swiper-container .swiper-wrapper {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 
   .howWeWork .swiper-container .swiper-pagination {
@@ -14954,23 +14985,26 @@ a {
 
   .howWeWork .swiper-container .swiper-slide {
     width: 195px;
-    height: 190px;
-    background: url("../img/howWeWorkBg.svg") no-repeat center/cover;
-    padding: 42px 4px 10px;
+    height: 220px;
+    background: white;
     position: relative;
     -webkit-transition: .3s;
     -o-transition: .3s;
     transition: .3s;
+    -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 54px 4px 10px;
+    border-radius: 10px;
   }
 
-  .howWeWork .swiper-container .swiper-slide:not(:first-child):before {
+  .howWeWork .swiper-container .swiper-slide:before {
     content: '';
     position: absolute;
-    top: 48.5%;
+    top: 50%;
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
             transform: translateY(-50%);
-    left: -5px;
+    left: -15px;
     height: 29px;
     width: 10px;
     background: url("../img/howWeWorkArrow.svg") no-repeat center;
@@ -14983,10 +15017,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon1.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon1.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(2):after {
@@ -14996,10 +15030,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon2.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon2.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(3):after {
@@ -15009,10 +15043,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon3.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon3.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(4):after {
@@ -15022,10 +15056,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon4.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon4.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(5):after {
@@ -15035,10 +15069,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon5.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon5.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(6):after {
@@ -15048,10 +15082,10 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon6.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon6.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(7):after {
@@ -15061,16 +15095,26 @@ a {
     -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
             transform: translateX(-50%);
-    top: 57px;
-    width: 40px;
-    height: 40px;
-    background: url("../img/howWeWorkIcon7.svg");
+    top: 25px;
+    width: 20px;
+    height: 20px;
+    background: url("../img/howWeWorkIcon7.svg") no-repeat center/cover;
   }
 
   .howWeWork .swiper-container .route__title {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 10px;
+    height: 38px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 
   .howWeWork .swiper-container .route__descr {
@@ -15284,18 +15328,21 @@ a {
     font-size: 14px;
   }
 
+  .howWeWork .swiper-container {
+    max-width: 288px;
+    height: 330px;
+  }
+
   .howWeWork .swiper-container .swiper-slide {
-    padding: 74px 4px 10px;
-    background: white;
-    -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 54px 7px 10px;
     border-radius: 10px;
+    height: 270px;
   }
 
   .howWeWork .swiper-container .swiper-slide:nth-child(n):after {
     width: 20px;
     height: 20px;
-    top: 40px;
+    top: 25px;
     background-size: cover;
   }
 
@@ -15309,6 +15356,10 @@ a {
     font-size: 12px;
     max-width: 150px;
     margin: 0 auto;
+  }
+
+  .howWeWork__buttons {
+    margin-bottom: 0;
   }
 
   .howWeWork__buttons p {
