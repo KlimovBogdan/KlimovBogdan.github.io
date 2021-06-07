@@ -25,94 +25,138 @@ const header = document.querySelector('.header')
 burger.addEventListener('click', () => {
     mobNavPage.classList.toggle('active')
     header.classList.toggle('active')
-
-    console.log(1)
 })
 
-const individual = document.querySelector(".individual")
-const legal = document.querySelector(".legal")
-const servicesContent = document.querySelectorAll(".service__link")
 
-const indivServices = ["Страховые споры", "Защита прав потребителей", "Семейные споры", "Трудовые споры", "Наследственные споры", "Споры ЖКХ", "Взыскание задолженности", "Земельные споры", "Медиация"]
-const legalServices = ["Арбитражные споры", "Юридическое сопровождение организации", "Защита интеллектуальной собственности", "Юридическое сопровождение ТСЖ, УК", "Налогообложение юридических лиц", "Исполнительное производство", "Ликвидация и создание юридических лиц", "Корпоративные споры", "Медиация"]
 
-individual.addEventListener('click', () => {
-    if (!individual.classList.contains('active')) {
-        individual.classList.toggle("active")
-        legal.classList.toggle("active")
 
-        servicesContent.forEach(e => e.style.opacity = '0')
-        setTimeout(ev => {
-            servicesContent.forEach((e, i) => e.innerHTML = indivServices[i])
-            servicesContent.forEach(e => e.style.opacity = '1')
-        }, 300)
-    }
-})
 
-legal.addEventListener('click', () => {
-    if (!legal.classList.contains('active')) {
-        individual.classList.toggle("active")
-        legal.classList.toggle("active")
-        servicesContent.forEach(e => e.style.opacity = '0')
-        
-        setTimeout(ev => {
-            servicesContent.forEach((e, i) => e.innerHTML = legalServices[i])
-            servicesContent.forEach(e => e.style.opacity = '1')
-        }, 300)
-    }
-})
+const getUrl = window.location.href.split('/')
 
-const links = document.querySelectorAll(".transBtn");
+if (getUrl[3].indexOf('#') === -1 && getUrl[3] !== 'index.html') {
+    const baseUrl = getUrl[0] + '//' + getUrl[2]
+    const linksDesktop = document.querySelectorAll(".headerNav .linkToPage")
+    const linksMob = document.querySelectorAll(".mobNav .linkToPage")
+    const hrefs = [`${baseUrl}/#welcome`, `${baseUrl}/#services`, `pricelist.html`, `${baseUrl}/#aboutUs`, `${baseUrl}/#howWeWork`, `${baseUrl}/#projects`, `${baseUrl}/#reviews`, `${baseUrl}/#footer`]
 
-for (const link of links) {
-  link.addEventListener("click", clickHandler);
+    linksDesktop.forEach((e, i) => {
+        e.setAttribute('href', hrefs[i])
+    })
+
+    linksMob.forEach((e, i) => {
+        e.setAttribute('href', hrefs[i])
+    })
 }
 
-function clickHandler(e) {
-  e.preventDefault();
-  const href = this.getAttribute("href");
-  const offsetTop = document.querySelector(href).offsetTop;
-  
-  if (mobNavPage.classList.contains('active')) {
-    mobNavPage.classList.remove('active')
-    header.classList.remove('active')
-  }
+// landing only
 
-  scroll({
-    top: offsetTop,
-    behavior: "smooth"
-  });
-}
+if (!getUrl[3] || getUrl[3].indexOf('#') > -1 || getUrl[3] === 'index.html') {
+    const links = document.querySelectorAll(".transBtn");
 
-const bodyWidth = window.innerWidth
-console.log(bodyWidth)
-if (bodyWidth > 991) {
-    var swiper = new Swiper(".swiper-container", {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
+    for (const link of links) {
+    link.addEventListener("click", clickHandler);
+    }
+
+    function clickHandler(e) {
+    e.preventDefault();
+    const href = this.getAttribute("href");
+    const offsetTop = document.querySelector(href).offsetTop;
+    
+    if (mobNavPage.classList.contains('active')) {
+        mobNavPage.classList.remove('active')
+        header.classList.remove('active')
+    }
+
+    scroll({
+        top: offsetTop,
+        behavior: "smooth"
     });
-} else if (bodyWidth > 767) {
-    var swiper = new Swiper(".swiper-container", {
-        slidesPerView: 2,
-        spaceBetween: 20,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+    }
+
+    const individual = document.querySelector(".individual")
+    const legal = document.querySelector(".legal")
+    const serivcesItem = document.querySelectorAll(".services__list-item")
+          
+    const indivServices = [
+        `<a href="strahoviye_spory.html" class="service__link">Страховые споры</a>`, 
+        `<a href="zaschita_prav_potrebiteley.html" class="service__link">Защита прав потребителей</a>`, 
+        `<a href="semeyniye_spori.html" class="service__link">Семейные споры</a>`, 
+        `<a href="trudovie_spori.html" class="service__link">Трудовые споры</a>`, 
+        `<a href="nasledstvennie_spori.html" class="service__link">Наследственные споры</a>`, 
+        `<a href="spori_zhkh.html" class="service__link">Споры ЖКХ</a>`, 
+        `<a href="vziskaniye_zadolzhennosti.html" class="service__link">Взыскание задолженности</a>`, 
+        `<a href="zemelnie_spori.html" class="service__link">Земельные споры</a>`, 
+        `<a href="mediatsiya.html" class="service__link">Медиация</a>`
+    ]
+
+    const legalServices = [
+        `<a href="arbitrazhnie_spory.html" class="service__link">Арбитражные споры</a>`, 
+        `<a href="yuridicheskoe_soprovozhdenie_organizatsii.html" class="service__link">Юридическое сопровождение организации</a>`, 
+        `<a href="zaschita_intellektualnoy_sobstvennosti.html" class="service__link">Защита интеллектуальной собственности</a>`, 
+        `<a href="yuridicheskoe_soprovozhdenie_tczh_uk.html" class="service__link">Юридическое сопровождение ТСЖ, УК</a>`, 
+        `<a href="nalogooblozhenie_yuridicheskih_lic.html" class="service__link">Налогообложение юридических лиц</a>`, 
+        `<a href="ispolnitelnoe_proizvodstvo.html" class="service__link">Исполнительное производство</a>`, 
+        `<a href="likvidaciya_i_cozdanie_yuridicheskih_lic.html" class="service__link">Ликвидация и создание юридических лиц</a>`, 
+        `<a href="сorporativnie_spori.html" class="service__link">Корпоративные споры</a>`, 
+        `<a href="mediatsiya.html" class="service__link">Медиация</a>`
+    ]
+
+    individual.addEventListener('click', () => {
+        if (!individual.classList.contains('active')) {
+            individual.classList.toggle("active")
+            legal.classList.toggle("active")
+
+            document.querySelectorAll(".service__link").forEach(e => e.style.opacity = '0')
+            setTimeout(ev => {
+                serivcesItem.forEach((e, i) => e.innerHTML = indivServices[i])
+                document.querySelectorAll(".service__link").forEach(e => e.style.opacity = '1')
+            }, 300)
+        }
+    })
+
+    legal.addEventListener('click', () => {
+        if (!legal.classList.contains('active')) {
+            individual.classList.toggle("active")
+            legal.classList.toggle("active")
+            document.querySelectorAll(".service__link").forEach(e => e.style.opacity = '0')
+            
+            setTimeout(ev => {
+                serivcesItem.forEach((e, i) => e.innerHTML = legalServices[i])
+                document.querySelectorAll(".service__link").forEach(e => e.style.opacity = '1')
+            }, 300)
+        }
+    })
+
+    const bodyWidth = window.innerWidth
+    console.log(bodyWidth)
+    if (bodyWidth > 991) {
+        var swiper = new Swiper(".swiper-container", {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    } else if (bodyWidth > 767) {
+        var swiper = new Swiper(".swiper-container", {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    } else {
+        var swiper = new Swiper(".swiper-container", {
+            slidesPerView: 1,
+            spaceBetween: 15,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
           },
-    });
-} else {
-    var swiper = new Swiper(".swiper-container", {
-        slidesPerView: 1,
-        spaceBetween: 15,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-    });
+        });
+    }
 }
 
 
