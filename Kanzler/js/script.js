@@ -18,6 +18,8 @@ function testWebP(callback) {
     document.querySelector('body').classList.add('no-webp');
     }
     });
+(function(e){var c=0,d={},a=0,b={init:function(f){return this.each(function(){d=jQuery.extend({achieveTime:60,loop:0,eventList:"touchmove blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error",testPeriod:10,useMultiMode:1,callBack:function(g){console.log("Achieved!")},watchEvery:1,counter:{test:0,achiev:0}},f);d.watchEvery*=1000;if(d.useMultiMode){b.loadMultiData()}if(d.counter.achiev!=-1){e(this).bind(d.eventList,b.eventTrigger);b.process()}})},process:function(){d.counter.test+=1;if(d.counter.test==d.testPeriod){if(a){a=0;d.counter.achiev+=d.testPeriod}d.counter.test=0}c=setTimeout(b.process,d.watchEvery);if(d.counter.achiev>=d.achieveTime){if(!d.loop){clearTimeout(c)}d.counter.achiev=d.loop?0:-1;d.callBack.call(this,d)}if(d.useMultiMode){document.cookie="activity="+d.counter.test+"|"+d.counter.achiev+"; path=/;"}},eventTrigger:function(){a=1},loadMultiData:function(){var h=" activity=";var g=" "+document.cookie;if(g.length>0){if(g.indexOf(h)!=-1){offset=g.indexOf(h)+h.length;var f=unescape(g.substring(offset,g.indexOf(";",offset)==-1?g.length:g.indexOf(";",offset))).split("|");d.counter.test=parseInt(f[0]);d.counter.achiev=parseInt(f[1]);return;}}d.counter.test=d.counter.achiev=0}};e.fn.activity=function(f){if(b[f]){return b[f].apply(this,Array.prototype.slice.call(arguments,1))}else{if(typeof f==="object"||!f){return b.init.apply(this,arguments)}else{e.error("Method "+f+" does not exist on jQuery.activity")}}}})(jQuery);
+
 const burger = document.querySelector('.burger')
 const mobNavPage = document.querySelector('.mobNavPage')
 const header = document.querySelector('.header')
@@ -28,29 +30,51 @@ burger.addEventListener('click', () => {
 })
 
 
+const forms = document.querySelectorAll("form")
 
+forms.forEach(el => el.addEventListener('submit', (e) => {
+    e.preventDefault()
 
+    let urlAdress = window.location.href.split('/')
+    
+    let summary = $(el).serialize()
+
+    if (el.querySelector("div[data-name='question']")) {
+        summary += "&question=" + el.querySelector("div[data-name='question']").innerText
+    }
+
+    if (el.querySelector("div[data-name='review']")) {
+        summary += "&review=" + el.querySelector("div[data-name='review']").innerText
+    }
+
+    $.ajax({
+        url:     [urlAdress[0], urlAdress[2]].join('//') + '/php/mail.php',
+        type:     "POST", //метод отправки
+        data: summary,  // Сеарилизуем объект
+        success: function(response) { //Данные отправлены успешно
+            const thanksModal = new bootstrap.Modal(document.getElementById('thanksModal'), {
+                keyboard: false
+            })
+
+            e.target.parentElement.querySelector('.btn-close') && e.target.parentElement.querySelector('.btn-close').click()
+            thanksModal.show()
+
+            if (!el.querySelector("div[data-name='review']")) {
+                ym(80362936,'reachGoal','zayavka') 
+                console.log('done')
+            }
+        },
+        error: function(response) { 
+            alert(response)
+        }
+    });
+}))
 
 const getUrl = window.location.href.split('/')
 
-if (getUrl[3].indexOf('#') === -1 && getUrl[3] !== 'index.html') {
-    const baseUrl = getUrl[0] + '//' + getUrl[2]
-    const linksDesktop = document.querySelectorAll(".headerNav .linkToPage")
-    const linksMob = document.querySelectorAll(".mobNav .linkToPage")
-    const hrefs = [`${baseUrl}/#welcome`, `${baseUrl}/#services`, `pricelist.html`, `${baseUrl}/#aboutUs`, `${baseUrl}/#howWeWork`, `${baseUrl}/#projects`, `${baseUrl}/#reviews`, `${baseUrl}/#footer`]
-
-    linksDesktop.forEach((e, i) => {
-        e.setAttribute('href', hrefs[i])
-    })
-
-    linksMob.forEach((e, i) => {
-        e.setAttribute('href', hrefs[i])
-    })
-}
-
 // landing only
 
-if (!getUrl[3] || getUrl[3].indexOf('#') > -1 || getUrl[3] === 'index.html') {
+if (getUrl[3].indexOf('index.html') > -1 || getUrl[3].indexOf('html') === -1) {
     const links = document.querySelectorAll(".transBtn");
 
     for (const link of links) {
@@ -128,7 +152,7 @@ if (!getUrl[3] || getUrl[3].indexOf('#') > -1 || getUrl[3] === 'index.html') {
     })
 
     const bodyWidth = window.innerWidth
-    console.log(bodyWidth)
+    
     if (bodyWidth > 991) {
         var swiper = new Swiper(".swiper-container", {
             slidesPerView: 3,
@@ -157,6 +181,19 @@ if (!getUrl[3] || getUrl[3].indexOf('#') > -1 || getUrl[3] === 'index.html') {
           },
         });
     }
+} else {
+    const baseUrl = getUrl[0] + '//' + getUrl[2]
+    const linksDesktop = document.querySelectorAll(".headerNav .linkToPage")
+    const linksMob = document.querySelectorAll(".mobNav .linkToPage")
+    const hrefs = [`${baseUrl}/#welcome`, `${baseUrl}/#services`, `pricelist.html`, `${baseUrl}/#aboutUs`, `${baseUrl}/#howWeWork`, `${baseUrl}/#projects`, `${baseUrl}/#reviews`, `${baseUrl}/#footer`]
+
+    linksDesktop.forEach((e, i) => {
+        e.setAttribute('href', hrefs[i])
+    })
+
+    linksMob.forEach((e, i) => {
+        e.setAttribute('href', hrefs[i])
+    })
 }
 
 
